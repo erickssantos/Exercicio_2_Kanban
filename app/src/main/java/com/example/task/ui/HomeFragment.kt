@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import com.example.task.R
 import com.example.task.databinding.FragmentDoneBinding
 import com.example.task.databinding.FragmentHomeBinding
+import com.example.task.ui.adapter.ViewPagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class HomeFragment : Fragment() {
@@ -23,6 +25,25 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initTabs()
+    }
+
+    private fun initTabs() {
+        val pageAdapter = ViewPagerAdapter(requireActivity())
+        binding.viewPager.adapter = pageAdapter
+        pageAdapter.addFragment(TodoFragment(), R.string.status_task_todo)
+        pageAdapter.addFragment(TodoFragment(), R.string.status_task_doing)
+        pageAdapter.addFragment(TodoFragment(), R.string.status_task_done)
+
+        binding.viewPager.offscreenPageLimit= pageAdapter.itemCount
+
+        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+            tab.text = getString(pageAdapter.getTitle(position))
+        }.attach()
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
