@@ -46,7 +46,7 @@
                 android:id="@+id/editTextDescricao"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/bg_edit_text"
+                style="@style/EditTextTheme"
                 android:hint="Informe sua nova Tarefa"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -106,14 +106,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_btn"
-                android:backgroundTint="@null"
                 android:text="Salvar"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/radioGroup" />
+                app:layout_constraintTop_toBottomOf="@id/radioGroup"
+                style="@style/ButtonTheme"/>
 
             <ProgressBar
                 android:id="@+id/progressBar"

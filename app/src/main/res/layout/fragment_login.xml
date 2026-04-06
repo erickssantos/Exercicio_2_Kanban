@@ -24,13 +24,13 @@
            android:textColor="@color/white"/>
 
        <EditText
+           android:id="@+id/editEmail"
            android:layout_width="match_parent"
            android:layout_height="48dp"
            android:hint="Digite seu e-mail"
            android:inputType="textEmailAddress"
-           android:padding="10dp"
            android:layout_marginTop="4dp"
-           android:background="@drawable/bg_edit_text"/>
+           style="@style/EditTextTheme"/>
 
        <TextView
            android:layout_width="wrap_content"
@@ -40,23 +40,22 @@
            android:layout_marginTop="16dp"/>
 
        <EditText
+           android:id="@+id/editSenha"
            android:layout_width="match_parent"
            android:layout_height="48dp"
            android:inputType="textPassword"
            android:hint="Digite sua senha"
-           android:padding="10dp"
            android:layout_marginTop="4dp"
-           android:background="@drawable/bg_edit_text"/>
+           style="@style/EditTextTheme"/>
 
        <com.google.android.material.button.MaterialButton
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:text="Login"
            android:id="@+id/btnLogin"
-           android:textColor="@color/white"
            app:backgroundTint="@color/azul3"
-           android:background="@drawable/bg_btn"
-           android:layout_marginTop="16dp"/>
+           android:layout_marginTop="16dp"
+           style="@style/ButtonTheme"/>
 
        <LinearLayout
            android:layout_width="match_parent"
