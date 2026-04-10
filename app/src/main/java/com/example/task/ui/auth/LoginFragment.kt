@@ -50,10 +50,10 @@ class LoginFragment : Fragment() {
             if (senha.isNotBlank()){
                 findNavController().navigate(R.id.action_global_homeFragment)
             }else{
-                showBottonSheet(message = R.string.password_empty)
+                showBottonSheet(message = getString(R.string.password_empty))
             }
         }else{
-            showBottonSheet(message = R.string.email_empty)
+            showBottonSheet(message = getString(R.string.email_empty))
         }
     }
 
