@@ -10,12 +10,15 @@ import com.example.task.R
 import com.example.task.databinding.FragmentRegisterBinding
 import com.example.task.util.initToolbar
 import com.example.task.util.showBottonSheet
+import com.google.firebase.auth.FirebaseAuth
 
 
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

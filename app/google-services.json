@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "196634253840",
+    "project_id": "taskapp-dispomov",
+    "storage_bucket": "taskapp-dispomov.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196634253840:android:7e00f28742b81df3640895",
+        "android_client_info": {
+          "package_name": "com.example.task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB18j7qoSDDT6G_kYAihDmEQZCEkzD5eRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
