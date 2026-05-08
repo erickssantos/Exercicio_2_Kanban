@@ -4,10 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="azul1">#243A69</color>
     <color name="azul2">#304E68</color>
-    <color name="azul3">#306389</color>
+    <color name="azul3">#5AA1DB</color>
     <color name="gelo">#D4CDC5</color>
-    <color name="color_details">#04D5C1</color>
-    <color name="color_delete">#FF4C3B</color>
+    <color name="color_details">#15AEDB</color>
+    <color name="color_delete">#D74715</color>
     <color name="color_default">#083D9B</color>
 
 </resources>
