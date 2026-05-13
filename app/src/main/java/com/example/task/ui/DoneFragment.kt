@@ -35,7 +35,7 @@ class DoneFragment : Fragment() {
 
     private fun initRecyclerViewTask(taskList: List<Task>) {
 
-        taskAdapter = TaskAdapter(taskList)
+        taskAdapter = TaskAdapter(requireContext(),taskList)
         binding.RecyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
         binding.RecyclerViewTask.setHasFixedSize(true)
 
