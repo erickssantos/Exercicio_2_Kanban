@@ -32,6 +32,15 @@
 
     <string name="description_empty_form_task_fragment">Preencha uma descrição</string>
 
+    <string name="account_not_registered_register_fragment">Nenhuma conta encontrda com este e-mail</string>
+    <string name="invalid_email_register_fragment">Insira um e-mail válido</string>
+    <string name="invalid_password_register_fragment">Senha inválida, tente novamente</string>
+    <string name="email_in_user_register_fragment">Este e-mail já está em uso</string>
+    <string name="strong_password_register_fragment">Insira uma senha mais forte</string>
+
+    <string name="error_generic">Erro</string>
+    <string name="text_delete_sucess_task">Sucesso!</string>
+
 
 
 

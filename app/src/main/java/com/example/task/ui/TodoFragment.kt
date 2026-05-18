@@ -14,6 +14,7 @@ import com.example.task.data.model.Task
 import com.example.task.databinding.FragmentDoneBinding
 import com.example.task.databinding.FragmentTodoBinding
 import com.example.task.ui.adapter.TaskAdapter
+import com.example.task.util.FirebaseHelper
 
 
 class TodoFragment : Fragment() {
@@ -34,23 +35,25 @@ class TodoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initListeners()
-
-        initRecyclerViewTask(getTask())
+        initRecyclerViewTask()
+        getTask()
     }
 
     private fun initListeners(){
         binding.floatingActionButton2.setOnClickListener {
-            findNavController().navigate((R.id.action_homeFragment_to_formTaskFragment))
+            findNavController().navigate(R.id.action_homeFragment_to_formTaskFragment)
         }
     }
 
-    private fun initRecyclerViewTask(taskList: List<Task>) {
+    private fun initRecyclerViewTask() {
 
-        taskAdapter = TaskAdapter(requireContext(),taskList) {task, option -> optionSelected(task,option)}
-        binding.RecyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
-        binding.RecyclerViewTask.setHasFixedSize(true)
+        taskAdapter = TaskAdapter(requireContext()) {task, option -> optionSelected(task,option)}
 
-        binding.RecyclerViewTask.adapter = taskAdapter
+        with(binding.RecyclerViewTask){
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+            adapter = taskAdapter
+        }
     }
 
     private fun optionSelected(task:Task, option:Int){
@@ -66,17 +69,44 @@ class TodoFragment : Fragment() {
             }
 
             TaskAdapter.SELECT_NEXT -> {
+                task.status =  Status.DOING
+                updateTask(task)
                 Toast.makeText(requireContext(), "Próximo", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun getTask() = listOf(
-        Task("0","Criar nova tela do app", Status.TODO),
-        Task("1", "Validar informações na tela de login", Status.TODO),
-        Task("3", "Salvar token localmente", Status.TODO),
-        Task("2","Criar funcionalidade de logout no app", Status.TODO)
-    )
+    private fun getTask() {
+        val taskList = listOf(
+            Task("0","Criar nova tela do app", Status.TODO),
+            Task("1", "Validar informações na tela de login", Status.TODO),
+            Task("3", "Salvar token localmente", Status.TODO),
+            Task("2","Criar funcionalidade de logout no app", Status.TODO)
+        )
+        taskAdapter.submitList(taskList)
+    }
+
+    private fun deleteTask(task: Task){
+        FirebaseHelper.getDatabase()
+            .child("task")
+            .child(FirebaseHelper.getIdUser())
+            .child(task.id)
+            .removeValue().addOnCompleteListener { result ->
+                if (result.isSuccessful){
+                    Toast.makeText(requireContext(), R.string.text_delete_sucess_task, Toast.LENGTH_SHORT).show()
+
+                    val oldList = taskAdapter.currentList
+                    val newList = oldList.toMutableList().apply { remove(task) }
+                    taskAdapter.submitList(newList)
+                }else{
+                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun updateTask(task:Task){
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

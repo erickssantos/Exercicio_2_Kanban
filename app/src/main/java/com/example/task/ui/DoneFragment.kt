@@ -31,16 +31,19 @@ class DoneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerViewTask(getTask())
+        initRecyclerViewTask()
+        getTask()
     }
 
-    private fun initRecyclerViewTask(taskList: List<Task>) {
+    private fun initRecyclerViewTask() {
 
-        taskAdapter = TaskAdapter(requireContext(),taskList) {task, option -> optionSelected(task,option)}
-        binding.RecyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
-        binding.RecyclerViewTask.setHasFixedSize(true)
+        taskAdapter = TaskAdapter(requireContext()) {task, option -> optionSelected(task,option)}
 
-        binding.RecyclerViewTask.adapter = taskAdapter
+         with(binding.RecyclerViewTask){
+             layoutManager = LinearLayoutManager(requireContext())
+             setHasFixedSize(true)
+             adapter = taskAdapter
+         }
     }
 
     private fun optionSelected(task:Task, option:Int){
@@ -61,11 +64,14 @@ class DoneFragment : Fragment() {
         }
     }
 
-    private fun getTask() = listOf(
-        Task("2","Alterar ícones", Status.DONE),
-        Task("0", "Sincronizar contas", Status.DONE),
-        Task("1","Testar os cósdigos", Status.DONE),
-    )
+    private fun getTask() {
+        val taskList = listOf(
+            Task("2","Alterar ícones", Status.DONE),
+            Task("0", "Sincronizar contas", Status.DONE),
+            Task("1","Testar os cósdigos", Status.DONE),
+        )
+        taskAdapter.submitList(taskList)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

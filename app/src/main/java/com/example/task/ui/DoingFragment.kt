@@ -33,16 +33,19 @@ class DoingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerViewTask(getTask())
+        initRecyclerViewTask()
+        getTask()
     }
 
-    private fun initRecyclerViewTask(taskList: List<Task>) {
+    private fun initRecyclerViewTask() {
 
-        taskAdapter = TaskAdapter(requireContext(),taskList) {task, option -> optionSelected(task,option)}
-        binding.RecyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
-        binding.RecyclerViewTask.setHasFixedSize(true)
+        taskAdapter = TaskAdapter(requireContext()) {task, option -> optionSelected(task,option)}
 
-        binding.RecyclerViewTask.adapter = taskAdapter
+        with(binding.RecyclerViewTask){
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+            adapter = taskAdapter
+        }
     }
 
     private fun optionSelected(task:Task, option:Int){
@@ -63,12 +66,14 @@ class DoingFragment : Fragment() {
         }
     }
 
-    private fun getTask() = listOf(
-        Task("0","Começar programação em bloco", Status.DOING),
-        Task("2", "Enviar para o GitHub", Status.DOING),
-        Task("1","Revisar código", Status.DOING),
-
-    )
+    private fun getTask() {
+        val taskList = listOf(
+            Task("0","Começar programação em bloco", Status.DOING),
+            Task("2", "Enviar para o GitHub", Status.DOING),
+            Task("1","Revisar código", Status.DOING),
+        )
+        taskAdapter.submitList((taskList))
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
