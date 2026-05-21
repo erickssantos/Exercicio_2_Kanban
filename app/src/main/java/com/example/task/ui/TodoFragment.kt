@@ -16,6 +16,7 @@ import com.example.task.data.model.Task
 import com.example.task.databinding.FragmentTodoBinding
 import com.example.task.ui.adapter.TaskAdapter
 import com.example.task.util.FirebaseHelper
+import com.example.task.util.showBottonSheet
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -100,7 +101,7 @@ class TodoFragment : Fragment() {
         // Nota: Certifique-se de que 'showBottomSheet' e 'HomeFragmentDirections' existem no seu projeto.
         when (option){
             TaskAdapter.SELECT_REMOVER -> {
-                showBottomSheet(titleDialog = R.string.text_title_dialog_delete,
+                showBottonSheet(titleDialog = R.string.text_title_dialog_delete,
                     message = getString(R.string.text_message_dialog_delete),
                     titleButton = R.string.text_button_dialog_confirm,
                     onClick = {

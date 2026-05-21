@@ -16,9 +16,11 @@ import com.example.task.data.model.Task
 import com.example.task.databinding.FragmentDoingBinding
 import com.example.task.ui.adapter.TaskAdapter
 import com.example.task.util.FirebaseHelper
+import com.example.task.util.showBottonSheet
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+
 
 class DoingFragment : Fragment() {
 
@@ -82,7 +84,7 @@ class DoingFragment : Fragment() {
     private fun optionSelected(task:Task, option:Int){
         when (option){
             TaskAdapter.SELECT_REMOVER -> {
-                showBottomSheet(titleDialog = R.string.text_title_dialog_delete,
+                showBottonSheet(titleDialog = R.string.text_title_dialog_delete,
                     message = getString(R.string.text_message_dialog_delete),
                     titleButton = R.string.text_button_dialog_confirm,
                     onClick = {

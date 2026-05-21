@@ -13,13 +13,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.database
-import com.joice.task.R
-import com.joice.task.data.model.Status
-import com.joice.task.data.model.Task
-import com.joice.task.databinding.FragmentDoneBinding
-import com.joice.task.databinding.FragmentFormTaskBinding
-import com.joice.task.util.initToolbar
-import com.joice.task.util.showBottomSheet
+import com.example.task.R
+import com.example.task.data.model.Status
+import com.example.task.data.model.Task
+import com.example.task.databinding.FragmentDoneBinding
+import com.example.task.databinding.FragmentFormTaskBinding
+import com.example.task.util.initToolbar
+import com.example.task.util.showBottonSheet
 
 class FormTaskFragment : Fragment() {
 
@@ -75,7 +75,7 @@ class FormTaskFragment : Fragment() {
 
             saveTask()
         } else {
-            showBottomSheet(message = getString(R.string.description_empty_form_task_fragment))
+            showBottonSheet(message = getString(R.string.description_empty_form_task_fragment))
         }
     }
 
@@ -99,7 +99,7 @@ class FormTaskFragment : Fragment() {
                     }
                 } else {
                     binding.progressBar.isVisible = false
-                    showBottomSheet(message = getString(R.string.error_generic))
+                    showBottonSheet(message = getString(R.string.error_generic))
                 }
             }
     }
