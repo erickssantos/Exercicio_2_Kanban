@@ -16,16 +16,21 @@ import com.example.task.data.model.Task
 import com.example.task.databinding.FragmentTodoBinding
 import com.example.task.ui.adapter.TaskAdapter
 import com.example.task.util.FirebaseHelper
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 
 class TodoFragment : Fragment() {
 
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
     private lateinit var taskAdapter: TaskAdapter
-    private var reference: DatabaseReference
+    private lateinit var reference: DatabaseReference
     private lateinit var auth: FirebaseAuth
     
     // Adicionado o ViewModel que estava faltando ser declarado
