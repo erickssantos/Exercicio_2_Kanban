@@ -53,7 +53,7 @@ class RegisterFragment : Fragment() {
             if(senha.isNotBlank()) {
                 binding.progressBar.isVisible = true
                 registerUser(email, senha)
-                Toast.makeText(requireContext(), "Tudo OK!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Bem-vindo(a)!", Toast.LENGTH_SHORT).show()
             } else {
                 showBottonSheet(message = getString(R.string.password_empty_register_fragment))
             }
@@ -64,13 +64,11 @@ class RegisterFragment : Fragment() {
 
     private fun registerUser(email:String, password: String) {
         try {
-            // instanciando a variavel q representa o serviço de autenticação
             val auth = FirebaseAuth.getInstance()
 
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if(task.isSuccessful) {
-                        // encaminha para a tela home
                         findNavController().navigate(R.id.action_global_homeFragment)
                     } else {
                         binding.progressBar.isVisible = true

@@ -40,11 +40,11 @@
 
     <string name="error_generic">Erro</string>
     <string name="text_delete_sucess_task">Sucesso!</string>
-    <string name="text_save_sucess_form_task_fragment">Sucesso!</string>
+    <string name="text_save_sucess_form_task_fragment">Salvo!</string>
 
     <string name="text_list_task_empty">Lista vazia</string>
     <string name="text_title_dialog_delete">Deletar</string>
-    <string name="text_message_dialog_delete">Deletar</string>
+    <string name="text_message_dialog_delete">Tem certeza que deseja deletar a tarefa?</string>
     <string name="text_button_dialog_confirm">Confirmar?</string>
 
     <string name="text_list_task_load">Carregando</string>
