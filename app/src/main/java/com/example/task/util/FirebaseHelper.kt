@@ -16,7 +16,6 @@ class FirebaseHelper {
 
         fun isAuthenticated() = getAuth().currentUser != null
 
-        // Coloquei a função aqui dentro do companion object!
         fun validError(error: String): Int {
             return when {
                 error.contains("There is no user record corresponding to this identifier") -> {
@@ -44,5 +43,5 @@ class FirebaseHelper {
                 }
             }
         }
-    } // O companion object agora fecha aqui
+    }
 }

@@ -33,8 +33,7 @@ class TodoFragment : Fragment() {
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var reference: DatabaseReference
     private lateinit var auth: FirebaseAuth
-    
-    // Adicionado o ViewModel que estava faltando ser declarado
+
     private val viewModel: TaskViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -69,7 +68,6 @@ class TodoFragment : Fragment() {
                     find{ it.id == updateTask.id}?.description = updateTask.description
                 }
 
-                // Corrigido para newList com L maiúsculo
                 val position = newList.indexOfFirst { it.id == updateTask.id }
 
                 //Envia a lista atualiazada para o adapter
@@ -83,8 +81,10 @@ class TodoFragment : Fragment() {
 
     private fun initListeners(){
         binding.floatingActionButton2.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(null)
             findNavController().navigate(R.id.action_homeFragment_to_formTaskFragment)
         }
+        observerViewModel()
     }
 
     private fun initRecyclerViewTask() {
@@ -98,7 +98,6 @@ class TodoFragment : Fragment() {
     }
 
     private fun optionSelected(task:Task, option:Int){
-        // Nota: Certifique-se de que 'showBottomSheet' e 'HomeFragmentDirections' existem no seu projeto.
         when (option){
             TaskAdapter.SELECT_REMOVER -> {
                 showBottonSheet(titleDialog = R.string.text_title_dialog_delete,
@@ -112,7 +111,7 @@ class TodoFragment : Fragment() {
             TaskAdapter.SELECT_EDIT -> {
                 val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(task)
                 findNavController().navigate(action)
-            } // Chave de fechamento que faltava aqui!
+            }
 
             TaskAdapter.SELECT_DETAILS -> {
                 Toast.makeText(requireContext(),"Detalhes ${task.description}", Toast.LENGTH_SHORT).show()
@@ -131,7 +130,6 @@ class TodoFragment : Fragment() {
             .child(FirebaseHelper.getIdUser())
             .addValueEventListener(object: ValueEventListener{
                 override fun onDataChange(p0: DataSnapshot) {
-                    // Corrigido para mutableListOf com O maiúsculo
                     val taskList = mutableListOf<Task>()
 
                     for (ds in p0.children){

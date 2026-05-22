@@ -22,63 +22,80 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
         initListener()
+
     }
 
-    private fun initListener(){
+    private fun initListener() {
         binding.btnLogin.setOnClickListener {
             validateData()
         }
+
         binding.btnRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+
         binding.btnRecover.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_recoverAccountFragment)
         }
     }
 
-    private fun validateData(){
+    private fun validateData() {
         val email = binding.editEmail.text.toString().trim()
         val senha = binding.editSenha.text.toString().trim()
-
-        if (email.isNotBlank()){
-            if (senha.isNotBlank()){
-            }else{
+        if(email.isNotBlank()) {
+            if(senha.isNotBlank()) {
+                binding.progressBar.isVisible = true
+                loginUser(email, senha)
+            } else {
                 showBottonSheet(message = getString(R.string.password_empty))
             }
-        }else{
+        } else {
             showBottonSheet(message = getString(R.string.email_empty))
         }
     }
 
-    private fun loginUser(email:String, password:String) {
+    private fun loginUser(email: String, password: String) {
         try {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
-                    task ->
-                    if(task.isSuccessful){
+                        task ->
+                    if(task.isSuccessful) {
                         findNavController().navigate(R.id.action_global_homeFragment)
-                    }else{
-                        binding.progressBar.isVisible = false
+                    } else {
+                        binding.progressBar.isVisible = true
                         showBottonSheet(message = getString(FirebaseHelper.validError(task.exception?.message.toString())))
                     }
                 }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
+    private fun checkAuth(){
+        try {
+            val currentUser = auth.currentUser
 
+            if (currentUser != null) {
+                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+            } else {
+            }
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

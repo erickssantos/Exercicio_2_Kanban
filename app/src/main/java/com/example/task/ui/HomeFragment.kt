@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.task.R
-import com.example.task.databinding.FragmentDoneBinding
 import com.example.task.databinding.FragmentHomeBinding
 import com.example.task.ui.adapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-
+import com.google.firebase.auth.FirebaseAuth // Importe do Firebase (se for usar)
 
 class HomeFragment : Fragment() {
 
@@ -29,6 +29,19 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initTabs()
+        initListeners()
+    }
+
+    private fun initListeners() {
+        binding.btnLogout.setOnClickListener {
+            efetuarLogout()
+        }
+    }
+
+    private fun efetuarLogout() {
+        FirebaseAuth.getInstance().signOut()
+
+        findNavController().navigate(R.id.action_homeFragment_to_splashFragment)
     }
 
     private fun initTabs() {
@@ -38,12 +51,13 @@ class HomeFragment : Fragment() {
         pageAdapter.addFragment(DoingFragment(), R.string.status_task_doing)
         pageAdapter.addFragment(DoneFragment(), R.string.status_task_done)
 
-        binding.viewPager.offscreenPageLimit= pageAdapter.itemCount
+        binding.viewPager.offscreenPageLimit = pageAdapter.itemCount
 
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             tab.text = getString(pageAdapter.getTitle(position))
         }.attach()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

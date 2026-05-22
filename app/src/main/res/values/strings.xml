@@ -48,6 +48,10 @@
     <string name="text_button_dialog_confirm">Confirmar?</string>
 
     <string name="text_list_task_load">Carregando</string>
+    <string name="text_toolbar_update_form_task_frgment">Editando tarefa...</string>
+    <string name="text_update_sucess_form_task_fragment">Sucesso!</string>
+    <string name="text_message_recover_account_fragment">Email enviado</string>
+
 
 
 

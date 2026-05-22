@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_homeFragment_to_formTaskFragment"
             app:destination="@id/formTaskFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_splashFragment"
+            app:destination="@id/splashFragment" />
     </fragment>
 
     <fragment
@@ -69,5 +72,9 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
+    <argument
+        android:name="task"
+        app:argType="com.example.task.data.model.Task"
+        app:nullable="true" />
 
 </navigation>

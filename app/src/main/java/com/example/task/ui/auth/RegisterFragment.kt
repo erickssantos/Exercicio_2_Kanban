@@ -17,19 +17,20 @@ import com.google.firebase.auth.FirebaseAuth
 
 class RegisterFragment : Fragment() {
 
+
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
 
-
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,41 +39,45 @@ class RegisterFragment : Fragment() {
         initListener()
     }
 
-    private fun initListener(){
+    private fun initListener() {
         binding.btnCriarConta.setOnClickListener {
             validateData()
         }
     }
 
-    private fun validateData(){
+
+    private fun validateData() {
         val email = binding.editEmail.text.toString().trim()
         val senha = binding.editSenha.text.toString().trim()
-
-        if (email.isNotBlank()){
-            if (senha.isNotBlank()){
+        if(email.isNotBlank()) {
+            if(senha.isNotBlank()) {
                 binding.progressBar.isVisible = true
                 registerUser(email, senha)
                 Toast.makeText(requireContext(), "Tudo OK!", Toast.LENGTH_SHORT).show()
-            }else{
+            } else {
                 showBottonSheet(message = getString(R.string.password_empty_register_fragment))
             }
-        }else{
+        } else {
             showBottonSheet(message = getString(R.string.email_empty_register_fragment))
         }
     }
 
-    private fun registerUser(email:String, senha:String) {
+    private fun registerUser(email:String, password: String) {
         try {
+            // instanciando a variavel q representa o serviço de autenticação
             val auth = FirebaseAuth.getInstance()
-            auth.createUserWithEmailAndPassword(email,senha)
+
+            auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
-                    if(task.isSuccessful){
+                    if(task.isSuccessful) {
+                        // encaminha para a tela home
                         findNavController().navigate(R.id.action_global_homeFragment)
-                    }else{
-                        Toast.makeText(requireContext(),task.exception?.message, Toast.LENGTH_SHORT).show()
+                    } else {
+                        binding.progressBar.isVisible = true
+                        Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
                     }
                 }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
         }
     }

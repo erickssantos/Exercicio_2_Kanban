@@ -55,7 +55,6 @@ class DoneFragment : Fragment() {
                     find{ it.id == updateTask.id}?.description = updateTask.description
                 }
 
-                // Corrigido para newList com L maiúsculo
                 val position = newList.indexOfFirst { it.id == updateTask.id }
 
                 //Envia a lista atualiazada para o adapter
@@ -91,7 +90,7 @@ class DoneFragment : Fragment() {
             TaskAdapter.SELECT_EDIT -> {
                 val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(task)
                 findNavController().navigate(action)
-            } // Chave de fechamento adicionada aqui!
+            }
 
             TaskAdapter.SELECT_DETAILS -> {
                 Toast.makeText(requireContext(),"Detalhes ${task.description}", Toast.LENGTH_SHORT).show()
@@ -110,7 +109,6 @@ class DoneFragment : Fragment() {
             .child(FirebaseHelper.getIdUser())
             .addValueEventListener(object: ValueEventListener{
                 override fun onDataChange(p0: DataSnapshot) {
-                    // Corrigido para mutableListOf com O maiúsculo
                     val taskList = mutableListOf<Task>()
 
                     for (ds in p0.children){
